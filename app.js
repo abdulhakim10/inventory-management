@@ -91,4 +91,7 @@ app.get("/api/products", (req, res) => {
     res.send("All products");
 });
 
+app.get("/api/products/:id", (req, res) => {
+    res.send("Single product");
+});
 module.exports = app;
