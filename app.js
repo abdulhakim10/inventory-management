@@ -87,5 +87,8 @@ app.post("/api/products", (req, res) => {
     res.send("Product added successfully");
 });
 
+app.get("/api/products", (req, res) => {
+    res.send("All products");
+});
 
 module.exports = app;
