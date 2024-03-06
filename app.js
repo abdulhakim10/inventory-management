@@ -9,7 +9,7 @@ app.use(express.json());
 app.use(cors());
 
 // schema design
-mongoose.Schema({
+const productSchema = mongoose.Schema({
     name: {
         type: String,
         required: [true, "Please provide a name for this product."],
@@ -81,6 +81,10 @@ mongoose.Schema({
 // initial route
 app.get("/", (req, res) => {
     res.send("Route is working Yay!!")
+});
+
+app.post("/api/products", (req, res) => {
+    res.send("Product added successfully");
 });
 
 
