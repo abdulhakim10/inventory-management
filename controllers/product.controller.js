@@ -1,9 +1,10 @@
-const Product = require('../models/Product');
+const { getProductService, postProductService } = require("../services/product.service");
+
 
 exports.getProducts = async (req, res) => {
     try{
         // projection
-       const products = await Product.find(); 
+       const products = await getProductService(); 
        res.status(200).json({
         success: true,
         data: products
@@ -28,7 +29,7 @@ exports.postProduct = async(req, res, next) => {
     // const result = await product.save();
 
     // product save on database using create method
-    const result = await Product.create(req.body)
+    const result = await postProductService(req.body);
     result.logger();
 
     res.status(201).json({
