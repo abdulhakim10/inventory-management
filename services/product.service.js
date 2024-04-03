@@ -1,16 +1,16 @@
 const Product = require('../models/Product');
 
-module.exports.getProductService = async() => {
+module.exports.getProductService = async () => {
     const products = await Product.find({});
     return products;
 }
 
-module.exports.postProductService = async(data) => {
+module.exports.postProductService = async (data) => {
     const product = await Product.create(data);
     return product;
 }
 
-module.exports.updateProductService = async(productId, data) => {
+module.exports.updateProductService = async (productId, data) => {
     // const product = await Product.updateOne({_id: productId}, {$set: data}, {
     //     runValidators: true,
     // });
@@ -20,11 +20,18 @@ module.exports.updateProductService = async(productId, data) => {
     return result;
 }
 
-module.exports.bulkUpdateService = async(data) => {
+module.exports.bulkUpdateService = async (data) => {
     // console.log(ids)
-    const result = await Product.updateMany({_id: data.ids}, data.data, {
-        runValidators: true,
+    // const result = await Product.updateMany({_id: data.ids}, data.data, {
+    //     runValidators: true,
+    // });
+
+    const products = [];
+    data.ids.forEach(product => {
+        products.push(Product.updateOne({_id: product.id},  product.data, {runValidators: true}));
     });
+    
+    const result = await Promise.all(products);
     return result;
 
 }
