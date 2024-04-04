@@ -5,7 +5,37 @@ const { getProductService, postProductService, updateProductService, bulkUpdateS
 exports.getProducts = async (req, res) => {
     try{
         // projection
-       const products = await getProductService(); 
+        // const filters = {...req.query};
+
+        // // sort, page, limit => exclude
+        // const excludeFields = ["sort", "page", "limit"];
+        // excludeFields.forEach(field => delete filters[field])
+
+        // const queries = {};
+
+        // if(req.query.sort){
+        //     const sortBy = req.query.sort.split(',').join(' ');
+        //     queries.sortBy = sortBy;
+        // }
+        const filters ={...req.body};
+        
+        const excludeFields = ["sort", "page", "limit"];
+        excludeFields.forEach(field => delete filters[field]);
+
+        const queries = {};
+
+        if(req.query.sort){
+            // price,quantity => price quantity
+            const sortBy = req.query.sort.split(',').join(' ');
+            queries.sortBy = sortBy;
+        }
+
+        if(req.query.fields){
+            const fields = req.query.fields.split(',').join(' ');
+            queries.fields = fields;
+        }
+
+       const products = await getProductService(filters, queries); 
        res.status(200).json({
         success: true,
         data: products
