@@ -5,22 +5,18 @@ const { getProductService, postProductService, updateProductService, bulkUpdateS
 exports.getProducts = async (req, res) => {
     try{
         // projection
-        // const filters = {...req.query};
-
-        // // sort, page, limit => exclude
-        // const excludeFields = ["sort", "page", "limit"];
-        // excludeFields.forEach(field => delete filters[field])
-
-        // const queries = {};
-
-        // if(req.query.sort){
-        //     const sortBy = req.query.sort.split(',').join(' ');
-        //     queries.sortBy = sortBy;
-        // }
-        const filters ={...req.body};
+        let filters ={...req.query};
         
+        // sort, page, limit, => exclude
         const excludeFields = ["sort", "page", "limit"];
         excludeFields.forEach(field => delete filters[field]);
+
+        // gt, gte, lt, lte
+        let filtersString = JSON.stringify(filters);
+        filtersString = filtersString.replace(/\b(gt|gte|lt|lte)\b/g , match => `$${match}`);
+        filters = JSON.parse(filtersString);
+        // console.log(filters)
+        // console.log(filtersString)
 
         const queries = {};
 

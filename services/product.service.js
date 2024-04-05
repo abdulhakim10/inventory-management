@@ -1,7 +1,10 @@
 const Product = require('../models/Product');
 
 module.exports.getProductService = async (filters, queries) => {
-    const products = await Product.find(filters).sort(queries.sortBy).select(queries.fields);
+    const products = await Product
+        .find(filters)
+        .select(queries.fields)
+        .sort(queries.sortBy);
     return products;
 }
 
@@ -28,9 +31,9 @@ module.exports.bulkUpdateService = async (data) => {
 
     const products = [];
     data.ids.forEach(product => {
-        products.push(Product.updateOne({_id: product.id},  product.data, {runValidators: true}));
+        products.push(Product.updateOne({ _id: product.id }, product.data, { runValidators: true }));
     });
-    
+
     const result = await Promise.all(products);
     return result;
 
