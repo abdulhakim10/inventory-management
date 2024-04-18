@@ -11,6 +11,7 @@ app.use(cors());
 // routes
 const productRoute = require('./routes/product.route');
 const brandRoute = require('./routes/brand.route');
+const categoryRoute = require('./routes/category.route');
 
 // initial route
 app.get("/", (req, res) => {
@@ -37,5 +38,6 @@ app.get("/", (req, res) => {
 
 app.use("/api/v1/products", productRoute);
 app.use("/api/v1/brands", brandRoute);
+app.use("/api/v1/categories", categoryRoute);
 
 module.exports = app;
