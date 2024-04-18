@@ -9,7 +9,8 @@ app.use(express.json());
 app.use(cors());
 
 // routes
-const productRoute = require('./routes/product.route')
+const productRoute = require('./routes/product.route');
+const brandRoute = require('./routes/brand.route');
 
 // initial route
 app.get("/", (req, res) => {
@@ -35,5 +36,6 @@ app.get("/", (req, res) => {
 // });
 
 app.use("/api/v1/products", productRoute);
+app.use("/api/v1/brands", brandRoute);
 
 module.exports = app;
