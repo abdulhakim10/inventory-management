@@ -118,3 +118,19 @@ exports.bulkUpdateProduct = async(req, res, next) =>{
         }); 
     }
 }
+
+exports.fileUpload = async(req, res, next) => {
+    try {
+        res.status(200).json({
+            success: true,
+            message:"file uploaded successfully",
+            data: req.file
+        })
+    } catch(error) {
+        res.status(400).json({
+            success: false,
+            message:"couldn't upload the file",
+            error: error.message,
+        }); 
+    }
+}

@@ -1,6 +1,15 @@
 const express = require('express');
 const router = express.Router();
-const productController = require('../controllers/product.controller')
+const productController = require('../controllers/product.controller');
+// const multer = require('multer');
+const uploader = require('../middleware/uploader');
+
+// const uploader = multer({dest: "images/"});
+
+router.post("/file-upload", uploader.single("productImage"), productController.fileUpload)
+
+router.route('/bulk-update')
+.patch(productController.bulkUpdateProduct)
 
 router.route('/')
 .get(productController.getProducts)
@@ -8,8 +17,7 @@ router.route('/')
 
 // console.log(productController.updateProduct)
 
-router.route('/bulk-update')
-.patch(productController.bulkUpdateProduct)
+
 
 router.route('/:id')
 .patch(productController.updateProduct)
