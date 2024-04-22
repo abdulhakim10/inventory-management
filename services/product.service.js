@@ -20,7 +20,7 @@ module.exports.postProductService = async (data) => {
     // update Brand
     const res = await Brand.updateOne(
         {_id: brand.id},
-        {$push: {products: productId}}
+        {$push: {products: productId}}              
     )
     return product;
 }
