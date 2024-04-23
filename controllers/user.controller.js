@@ -92,3 +92,19 @@ exports.login = async (req, res) => {
         });
     }
 }
+
+exports.getMe = (req, res) => {
+  try {
+//    console.log(req.user);
+    const user = req.user;
+    res.status(200).json({
+      status: "success",
+      data: user,
+    });
+  } catch (error) {
+    res.status(500).json({
+      status: "fail",
+      error: error.message,
+    });
+  }
+}
