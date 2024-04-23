@@ -15,6 +15,7 @@ const categoryRoute = require('./routes/category.route');
 const storeRoute = require('./routes/store.route');
 const supplierRoute = require('./routes/supplier.route');
 const stockRoute = require('./routes/stock.route');
+const userRoute = require('./routes/user.route');
 
 // initial route
 app.get("/", (req, res) => {
@@ -45,5 +46,6 @@ app.use("/api/v1/categories", categoryRoute);
 app.use("/api/v1/stores", storeRoute);
 app.use("/api/v1/suppliers", supplierRoute);
 app.use("/api/v1/stocks", stockRoute);
+app.use("/api/v1/user", userRoute);
 
 module.exports = app;
