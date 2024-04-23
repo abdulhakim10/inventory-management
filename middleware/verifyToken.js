@@ -16,7 +16,7 @@ module.exports = async (req, res, next) => {
         if(!token) {
             return res.status(401).json({
                 status: "failed",
-                message: "unauthorized"
+                message: "You are not logged in"
             });
         }
 

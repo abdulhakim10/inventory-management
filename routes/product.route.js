@@ -3,6 +3,8 @@ const router = express.Router();
 const productController = require('../controllers/product.controller');
 // const multer = require('multer');
 const uploader = require('../middleware/uploader');
+const verifyToken = require('../middleware/verifyToken');
+const authorization = require('../middleware/authorization');
 
 // const uploader = multer({dest: "images/"});
 
@@ -13,7 +15,7 @@ router.route('/bulk-update')
 
 router.route('/')
 .get(productController.getProducts)
-.post(productController.postProduct)
+.post(verifyToken, authorization("admin"), productController.postProduct)
 
 // console.log(productController.updateProduct)
 
